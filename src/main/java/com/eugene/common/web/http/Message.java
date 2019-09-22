@@ -1,7 +1,5 @@
 package com.eugene.common.web.http;
 
-import org.springframework.web.bind.annotation.ResponseBody;
-
 public class Message {
 
     public final static Integer OK = 200;
