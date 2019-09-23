@@ -15,7 +15,11 @@ public class RegisterFilter {
         return FilterFactory.getFilter("firstFilter");
     }
 
-    @Bean
+    /**
+     * 该过滤器作为jwtAuth用, 不采用bean的方式注入 link to CorsConfigration类
+     * @return
+     */
+    /*@Bean*/
     public FilterRegistrationBean authFilter() {
         return FilterFactory.getFilter("authFilter", "/*", FilterOrderConstants.AUTH_FILTER_ORDER);
     }

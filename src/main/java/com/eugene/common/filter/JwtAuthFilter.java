@@ -1,23 +1,20 @@
 package com.eugene.common.filter;
 
 import com.eugene.common.utils.ContextUtil;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JwtAuthFilter implements Filter {
+public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        // Nothing to do
-    }
-
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = ContextUtil.getHttpServletRequest();
         HttpServletResponse httpServletResponse = ContextUtil.getHttpServletResponse();
+
         Boolean isFilter = true;
         if (httpServletRequest.getRequestURI().equals("/user/login")) {
             isFilter = false;
