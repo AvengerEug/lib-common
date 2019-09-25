@@ -1,7 +1,7 @@
 package com.eugene.common.controller;
 
-import com.eugene.common.exception.BusinessException;
 import com.eugene.common.web.http.Message;
+import com.eugene.common.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;

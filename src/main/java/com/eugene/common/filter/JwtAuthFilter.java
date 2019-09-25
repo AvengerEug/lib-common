@@ -1,6 +1,7 @@
 package com.eugene.common.filter;
 
 import com.eugene.common.utils.ContextUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.*;
@@ -12,16 +13,18 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest httpServletRequest = ContextUtil.getHttpServletRequest();
-        HttpServletResponse httpServletResponse = ContextUtil.getHttpServletResponse();
 
-        Boolean isFilter = true;
-        if (httpServletRequest.getRequestURI().equals("/user/login")) {
-            isFilter = false;
-        }
+        Boolean isFilter = !request.getRequestURI().equals("/user/login");
 
-        if (isFilter && getJwtToken(httpServletRequest) == null) {
-            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "无token");
+        if (isFilter) {
+
+            if (getJwtToken(request) == null) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "无token");
+                return;
+            }
+
+            String authToken = request.getHeader("jwt-token");
+            logger.info(authToken);
         }
 
         chain.doFilter(request, response);

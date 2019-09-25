@@ -1,8 +1,8 @@
 package com.eugene.common.factory;
 
+import com.eugene.common.constants.FilterOrderConstants;
 import com.eugene.common.filter.FirstFilter;
 import com.eugene.common.filter.JwtAuthFilter;
-import com.eugene.common.constants.FilterOrderConstants;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 
 public abstract class FilterFactory {
