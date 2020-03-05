@@ -14,7 +14,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        Boolean isFilter = !request.getRequestURI().equals("/user/login");
+        Boolean isFilter = !request.getRequestURI().equals("/user/login") && request.getParameter("status") == null;
 
         if (isFilter) {
 
